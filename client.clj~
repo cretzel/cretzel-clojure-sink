@@ -1,0 +1,20 @@
+(import 
+ '(java.net ServerSocket InetSocketAddress)
+ '(java.nio.channels ServerSocketChannel)
+ '(java.io BufferedInputStream BufferedOutputStream InputStreamReader OutputStreamWriter BufferedReader))
+
+(defn sendMessage 
+  "sends a message to the server over its output stream"
+  [out message]
+  (.write out message)
+  (.write out "\n")
+  (.flush out))
+ 
+(defn receiveMessage
+  "receives a message from the server over its input stream"
+  [in]
+  (.readLine in))
+
+
+(defn client
+      [host port]	

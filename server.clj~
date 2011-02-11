@@ -1,0 +1,13 @@
+(defn listen 
+      [serverSocket]
+      (let [clientSocket (.accept serverSocket)]
+      	   (.start (Thread. #(chat clientSocket))))
+
+(defn server 
+      [port]
+      (let [channel (ServerSocketChannel/open)
+	    serverSocket (.socket channel)
+	    socketAddress (InetSocketAddress. "localhost" port)]
+	    (.bind serverSocket socketAddress)
+	    (listen serverSocket)))
+
